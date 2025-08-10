@@ -245,10 +245,14 @@ function hookBinderTransact(mapper) {
 							data.setDataPosition(12); //Skip first 12 Bytes (seems to be other data)
 							let interfaceName = data.readString16();
 							data.restorePosition();
-							console.log("[" + mapper.className + "]");
-							console.log(interfaceName + "\n");
-							//To view a Dump of the Parcel you can do
-							//data.dump();
+							
+							if (interfaceName === "android.app.admin.IDevicePolicyManager") {
+								console.log("[" + mapper.className + "]");
+								console.log("Opcode: " + code + " Flags: " + flags + " OneWay: " + isOneWay);
+								console.log("Parcel Dump:");
+								console.log(data.dump());
+								console.log("\n");
+							}
 						}
 						
 					}catch(e) {
